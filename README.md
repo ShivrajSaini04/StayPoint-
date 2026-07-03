@@ -111,10 +111,15 @@ Run the project
 
 ```bash
 npm start
+```
 
+Visit
 
-Visit  :  http://localhost:3000
+```
+http://localhost:3000
+```
 
+---
 
 ##  Future Improvements
 
@@ -133,7 +138,8 @@ Visit  :  http://localhost:3000
 
 Shivraj Saini
 
-GitHub :   https://github.com/ShivrajSaini04
+GitHub:
+https://github.com/ShivrajSaini04
 
 ---
 
