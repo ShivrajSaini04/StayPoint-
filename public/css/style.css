@@ -1,0 +1,143 @@
+body{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container{
+     flex: 1;
+}
+  /* navbar */
+
+.navbar{
+    height: 4rem;
+    background-color: white;
+}
+
+.fa-location-arrow{
+    color: #fe424d;
+    font-size: 2rem;
+}
+.nav-link{
+    color: #222222 !important;
+}
+
+ /* footer */
+
+.f-info-link a{
+  text-decoration: none;
+color: #222222;
+}
+
+.f-info-link a:hover {
+    text-decoration: underline; 
+}
+
+.f-info-link{
+    width: 100%;
+}
+.f-info-socials , .f-info-brand{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    
+}
+
+.f-info-socials i {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+
+.f-info{
+    text-align: center;
+    height: 8rem;
+    display: flex;
+    background-color:#ebebeb ;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+}
+
+
+/* cards */
+.listing-card{
+    border: none !important;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+.card-img-top{
+    border-radius: 1rem !important;
+     width: 100%;
+    object-fit: cover;
+}
+.card-body{
+    padding: 0 !important;
+}
+
+.card-text{
+    font-weight: 400;
+}
+
+.card-link{
+    text-decoration: none;
+}
+
+/* card effect */
+
+.card-img-overlay{
+    opacity: 0;
+}
+
+.card-img-overlay:hover {
+    background-color: white;
+    opacity: .2;
+}
+
+/* new page */
+
+.add-btn{
+    background-color: #fe424d !important;
+    border: none !important;
+}
+
+/* edit page  */
+
+.edit-btn{
+    background-color: #fe424d !important;
+    border: none !important;
+}
+
+/* show page  */
+
+.show-img{
+    height: 40vh; 
+}
+
+/* edit and delete btns  */
+
+.btns{
+    display: flex;
+}
+
+.card-body{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* error page */
+
+.errorbox{
+    height: 60vh !important;
+}
+
+.erroricon{
+    margin-left: 12rem;
+    height: 20vh;
+}
+
+.error-msg{
+    margin-top: 2rem;
+    margin-left: 11rem;
+}
