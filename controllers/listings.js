@@ -16,16 +16,27 @@ module.exports.showListing = async (req, res) => {
         req.flash("error", "Listing doesn't exist");
         return res.redirect("/listings");
     }
-    res.render("listing/show.ejs", { listing })
+    res.render("listing/show.ejs", { listing });
 };
 
 module.exports.createListing = async (req, res) => {
-    const listingBody = req.body.listing;
-    let newList = new Listing(listingBody);
-    newList.owner = req.user._id;
-    await newList.save();
-    req.flash("success", "New Listing Created");
-    res.redirect("/listings");
+    try {
+        const listingBody = req.body.listing || {};
+        let newList = new Listing(listingBody);
+        if (req.file) {
+            const url = req.file.path || req.file.url || req.file.secure_url;
+            const filename = req.file.filename || req.file.public_id || req.file.originalname;
+            newList.image = { url, filename };
+        } else if (listingBody.image && listingBody.image.url) {
+            newList.image = listingBody.image;
+        }
+        newList.owner = req.user && req.user._id;
+        await newList.save();
+        req.flash("success", "New Listing Created");
+        res.redirect("/listings");
+    } catch (e) {
+        next(e);
+    }
 };
 
 module.exports.editListing = async (req, res) => {
@@ -40,7 +51,13 @@ module.exports.editListing = async (req, res) => {
 
 module.exports.updateListing = async (req, res) => {
     let { id } = req.params;
-    await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+    let updated = await Listing.findByIdAndUpdate(id, { ...req.body.listing }, { new: true });
+    if (req.file && updated) {
+        const url = req.file.path || req.file.url || req.file.secure_url;
+        const filename = req.file.filename || req.file.public_id || req.file.originalname;
+        updated.image = { url, filename };
+        await updated.save();
+    }
     req.flash("success", "Update Listing");
     res.redirect(`/listings/${id}`);
 };
