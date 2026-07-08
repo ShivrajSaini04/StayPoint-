@@ -141,3 +141,84 @@ color: #222222;
     margin-top: 2rem;
     margin-left: 11rem;
 }
+
+/* map */
+#map {
+    height: 400px;
+    width: 100%;
+    border-radius: 12px;
+}
+
+/* new  */
+.map-card {
+    background: #d6d1d1a1;
+    width: 80%;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    margin-top: 1rem;
+}
+
+.map-heading {
+    padding: 1rem 1.5rem;
+    margin: 0;
+    border-bottom: 1px solid #eee;
+    font-weight: 600;
+}
+
+#map {
+    height: 300px;
+    width: 100%;
+}
+
+.map-info {
+    padding: 1.5rem;
+}
+
+.map-info h5 {
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.map-info p {
+    color: #3b3a3a;
+    margin-bottom: 1rem;
+}
+
+.map-btn {
+    display: inline-block;
+    text-decoration: none;
+    background: #fe424d;
+    color: rgb(0, 0, 0);
+    padding: 0.7rem 1.2rem;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.map-btn:hover {
+    background: #e63946;
+    color: white;
+}
+
+/* map toggle buttons */
+
+.map-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.map-btn {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #f1f1f1;
+    font-weight: 600;
+}
+
+.map-btn.active {
+    background: #fe424d;
+    color: white;
+}

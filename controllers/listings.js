@@ -1,4 +1,5 @@
 const Listing = require("../models/listing");
+const axios = require("axios");
 
 module.exports.index = async (req, res) => {
     const allListing = await Listing.find({});
@@ -11,7 +12,15 @@ module.exports.newListing = (req, res) => {
 
 module.exports.showListing = async (req, res) => {
     let { id } = req.params;
-    let listing = await Listing.findById(id).populate({ path: "reviews", populate: { path: "author", } }).populate("owner");
+    let listing = await Listing.findById(id)
+        .populate({
+            path: "reviews",
+            populate: {
+                path: "author",
+            },
+        })
+        .populate("owner");
+
     if (!listing) {
         req.flash("error", "Listing doesn't exist");
         return res.redirect("/listings");
@@ -19,23 +28,39 @@ module.exports.showListing = async (req, res) => {
     res.render("listing/show.ejs", { listing });
 };
 
-module.exports.createListing = async (req, res) => {
+module.exports.createListing = async (req, res, next) => {
     try {
         const listingBody = req.body.listing || {};
         let newList = new Listing(listingBody);
+        const response = await axios.get(
+            "https://api.geoapify.com/v1/geocode/search",
+            {
+                params: {
+                    text: `${newList.location}, ${newList.country}`,
+                    apiKey: process.env.GEOAPIFY_API_KEY,
+                },
+            }
+        );
+
+        if (response.data.features.length > 0) {
+            const coordinates =
+                response.data.features[0].geometry.coordinates;
+            newList.geometry = {
+                type: "Point",
+                coordinates,
+            };
+        }
         if (req.file) {
             const url = req.file.path || req.file.url || req.file.secure_url;
             const filename = req.file.filename || req.file.public_id || req.file.originalname;
             newList.image = { url, filename };
-        } else if (listingBody.image && listingBody.image.url) {
-            newList.image = listingBody.image;
         }
-        newList.owner = req.user && req.user._id;
+        newList.owner = req.user._id;
         await newList.save();
         req.flash("success", "New Listing Created");
         res.redirect("/listings");
-    } catch (e) {
-        next(e);
+    } catch (err) {
+        next(err);
     }
 };
 
@@ -49,17 +74,22 @@ module.exports.editListing = async (req, res) => {
     res.render("listing/edit.ejs", { listing });
 };
 
-module.exports.updateListing = async (req, res) => {
-    let { id } = req.params;
-    let updated = await Listing.findByIdAndUpdate(id, { ...req.body.listing }, { new: true });
-    if (req.file && updated) {
-        const url = req.file.path || req.file.url || req.file.secure_url;
-        const filename = req.file.filename || req.file.public_id || req.file.originalname;
-        updated.image = { url, filename };
-        await updated.save();
+module.exports.updateListing = async (req, res, next) => {
+    try {
+        let { id } = req.params;
+        const listingBody = { ...req.body.listing };
+        if (req.file) {
+            listingBody.image = {
+                url: req.file.path || req.file.url || req.file.secure_url,
+                filename: req.file.filename || req.file.public_id || req.file.originalname,
+            };
+        }
+        await Listing.findByIdAndUpdate(id, listingBody, { new: true });
+        req.flash("success", "Update Listing");
+        res.redirect(`/listings/${id}`);
+    } catch (err) {
+        next(err);
     }
-    req.flash("success", "Update Listing");
-    res.redirect(`/listings/${id}`);
 };
 
 
