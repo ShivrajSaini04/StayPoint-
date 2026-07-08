@@ -78,14 +78,51 @@ module.exports.updateListing = async (req, res, next) => {
     try {
         let { id } = req.params;
         const listingBody = { ...req.body.listing };
+
+        // Purani listing nikalo
+        const listing = await Listing.findById(id);
+
+        // Sirf tab coordinates update karo jab location ya country change hui ho
+        if (
+            listing.location !== listingBody.location ||
+            listing.country !== listingBody.country
+        ) {
+            const response = await axios.get(
+                "https://api.geoapify.com/v1/geocode/search",
+                {
+                    params: {
+                        text: `${listingBody.location}, ${listingBody.country}`,
+                        apiKey: process.env.GEOAPIFY_API_KEY,
+                    },
+                }
+            );
+
+            if (response.data.features.length > 0) {
+                listingBody.geometry = {
+                    type: "Point",
+                    coordinates:
+                        response.data.features[0].geometry.coordinates,
+                };
+            }
+        }
+
+        // Image update
         if (req.file) {
             listingBody.image = {
                 url: req.file.path || req.file.url || req.file.secure_url,
-                filename: req.file.filename || req.file.public_id || req.file.originalname,
+                filename:
+                    req.file.filename ||
+                    req.file.public_id ||
+                    req.file.originalname,
             };
         }
-        await Listing.findByIdAndUpdate(id, listingBody, { new: true });
-        req.flash("success", "Update Listing");
+
+        await Listing.findByIdAndUpdate(id, listingBody, {
+            new: true,
+            runValidators: true,
+        });
+
+        req.flash("success", "Listing Updated Successfully");
         res.redirect(`/listings/${id}`);
     } catch (err) {
         next(err);
