@@ -52,6 +52,11 @@ body.dark-mode .listing-card:hover {
     box-shadow: 0 12px 25px rgb(179, 176, 176);
 }
 
+body.dark-mode .filters{
+    background-color: #1e1e1e;
+    border-bottom: 1px solid #333;
+}
+
 /* for dark footer */
 body.dark-mode .f-info {
     background-color: #181818;
