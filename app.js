@@ -82,7 +82,7 @@ app.all("/{*splat}", (req, res, next) => {
 // middleware
 
 app.use((err, req, res, next) => {
-    console.error(err);
+   console.error(err);
     let { status = 500, message = "Something went wrong" } = err;
     res.status(status).render("listing/error.ejs", { message, status });
 });

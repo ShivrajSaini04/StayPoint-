@@ -32,7 +32,7 @@
                 <button class="btn btn-dark  offset-5">Delete</button>
             </form>
         </div>
-        <% } %>
+    <% } %>
 
             <div class="col-8 offset-3 mb-3">
                 <% if (curruser) { %>
@@ -68,7 +68,7 @@
                     </form>
                     <% } %>
                         <hr>
-                        <% if (listing.review != undefined ) { %> 
+                        <% if (listing.reviews.length > 0 ) { %> 
                             <p><strong>All Reviews</strong></p>
                             <% } %>
                         <div class="row">
@@ -102,11 +102,11 @@
                         <div class="map-card">
                             <h4 class="map-heading">📍 Location</h4>
                         <div class="map-controls">
-                            <button id="street-btn" class="map-btn active">
+                            <button id="street-btn" class="map-btn-toggle active">
                                 🗺️ Street View
                             </button>
                         
-                            <button id="satellite-btn" class="map-btn">
+                            <button id="satellite-btn" class="map-btn-toggle">
                                 🛰️ Satellite View   
                             </button>
                         </div>
