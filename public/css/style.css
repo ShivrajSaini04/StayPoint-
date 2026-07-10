@@ -50,6 +50,13 @@ body{
     padding: 0.5rem 1rem;
     border-radius: 25px;
     border: 1px solid #ccc;
+    transition: all 0.3s ease;
+}
+.search-input.form-control:hover,
+.search-input.form-control:focus {
+    border-color: #fe424d;
+    box-shadow: 0 0 12px rgba(254, 66, 77, 0.3);
+    transform: translateY(-2px);
 }
 
 .search-btn.btn {
@@ -68,6 +75,146 @@ body{
     color: white;
 }
 
+/* Theme change of page light to dark and vice versa */
+
+/* for light theme */
+body {
+    background-color: #ffffff;
+    color: #222222;
+}
+
+.navbar {
+    background-color: white;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.nav-link {
+    color: #222 !important;
+}
+
+.nav-link:hover {
+    color: #fe424d !important;
+}
+
+.search-input.form-control {
+    background-color: white;
+    color: #222;
+    border: 1px solid #ccc;
+}
+
+.search-input::placeholder {
+    color: #474747;
+}
+
+.search-btn.btn {
+    background-color: #fe424d;
+    color: white;
+    border: none;
+}
+
+.theme-btn {
+    color: #222;
+    font-size: 1.2rem;
+}
+
+.theme-btn:hover {
+    color: #fe424d;
+}
+
+.listing-card {
+    background-color: white;
+    color: #222;
+    transition: all 0.3s ease;
+}
+
+.listing-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.925);
+}
+
+/* theme change  */
+
+/* for dark theme  */
+body.dark-mode {
+    background-color: #121212;
+    color: #f1f1f1;
+}
+
+body.dark-mode .navbar {
+    background-color: #181818 !important;
+    border-bottom: 1px solid #333;
+}
+
+body.dark-mode .nav-link {
+    color: #f1f1f1 !important;
+}
+
+body.dark-mode .nav-link:hover {
+    color: #fe424d !important;
+}
+
+body.dark-mode .search-input.form-control {
+    background-color: #222;
+    color: white;
+    border: 1px solid #555;
+}
+
+body.dark-mode .search-input::placeholder {
+    color: #aaa;
+}
+
+body.dark-mode .search-btn.btn {
+    background-color: #fe424d;
+    color: white;
+}
+
+body.dark-mode .theme-btn {
+    color: #f1f1f1;
+}
+
+body.dark-mode .theme-btn:hover {
+    color: #fe424d;
+}
+
+body.dark-mode .listing-card {
+    background-color: #1e1e1e;
+    color: #f1f1f1;
+}
+
+body.dark-mode .listing-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgb(179, 176, 176);
+}
+
+/* for dark footer */
+body.dark-mode .f-info {
+    background-color: #181818;
+    border-top: 1px solid #333;
+    color: #f1f1f1;
+}
+
+body.dark-mode .f-info-link a {
+    color: #d1d1d1;
+}
+
+body.dark-mode .f-info-link a:hover {
+    color: #fe424d;
+    text-decoration: underline;
+}
+
+body.dark-mode .f-info-socials i {
+    color: #d1d1d1;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .f-info-socials i:hover {
+    color: #fe424d;
+    transform: translateY(-3px);
+}
+
+body.dark-mode .f-info-brand {
+    color: #bdbdbd;
+}
 
  /* footer */
 
@@ -75,27 +222,21 @@ body{
   text-decoration: none;
 color: #222222;
 }
-
-.f-info-link a:hover {
-    text-decoration: underline; 
-}
-
 .f-info-link{
     width: 100%;
 }
+
+ .f-info-link a:hover {
+    color: #fe424d;
+    text-decoration: underline;
+}
+
 .f-info-socials , .f-info-brand{
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    
 }
-
-.f-info-socials i {
-    font-size: 1.2rem;
-    margin-right: 1rem;
-}
-
 .f-info{
     text-align: center;
     height: 8rem;
@@ -106,6 +247,21 @@ color: #222222;
     align-items: space-evenly;
 }
 
+.f-info-socials i {
+    font-size: 1.2rem;
+     margin-right: 1rem;
+    color: #000000;
+    transition: all 0.3s ease;
+}
+
+ .f-info-socials i:hover {
+    color: #fe424d;
+    transform: translateY(-3px);
+}
+
+ .f-info-brand {
+    color: #000000;
+}
 
 /* cards */
 .listing-card{
@@ -132,14 +288,14 @@ color: #222222;
 
 /* card effect */
 
-.card-img-overlay{
+/* .card-img-overlay{
     opacity: 0;
 }
 
 .card-img-overlay:hover {
     background-color: white;
     opacity: .2;
-}
+} */
 
 /* new page */
 
